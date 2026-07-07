@@ -1,0 +1,26 @@
+{
+  "user_123": {
+    "userId": "user_123",
+    "sender": "",
+    "currency": "USD",
+    "terms": "",
+    "notes": "",
+    "fieldTitles": {
+      "invoiceNumber": "Invoice No",
+      "date": "Date",
+      "paymentTerms": "Payment Terms",
+      "dueDate": "Due Date",
+      "poNumber": "PO Number",
+      "billTo": "Bill To",
+      "shipTo": "Ship To",
+      "sender": "From",
+      "item": "Item",
+      "quantity": "Quantity",
+      "rate": "Rate",
+      "amount": "Amount",
+      "notes": "Notes",
+      "terms": "Terms",
+      "title": "INVOICE"
+    }
+  }
+}

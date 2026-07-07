@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String        @id // NextAuth user id (Google sub, or generated on email/password signup)
+  email        String        @unique
+  passwordHash String?           // set only for email/password accounts; null for Google-only accounts
+  invoices     Invoice[]
+  template     UserTemplate?
+  createdAt    DateTime      @default(now())
+}
+
+model UserTemplate {
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id])
+  fromAddress String?
+  logoUrl     String?
+  currency    String  @default("USD")
+  terms       String?
+  notes       String?
+  fieldTitles Json? // overrides like "PO Number" -> "Reference"
+}
+
+model Invoice {
+  id           String        @id @default(cuid())
+  userId       String
+  user         User          @relation(fields: [userId], references: [id])
+  localId      String?       // the localStorage id this record was synced from, for de-duping on re-sync
+  number       String
+  status       InvoiceStatus @default(DRAFT)
+  billTo       String?
+  shipTo       String?
+  date         DateTime?
+  dueDate      DateTime?
+  paymentTerms String?
+  poNumber     String?
+  currency     String        @default("USD")
+  lineItems    Json // [{ description, quantity, rate, amount }]
+  notes        String?
+  terms        String?
+  taxRate      Float?        @default(0)
+  discount     Float?        @default(0)
+  shipping     Float?        @default(0)
+  amountPaid   Float?        @default(0)
+  total        Float         @default(0)
+  balanceDue   Float         @default(0)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SAVED
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique // random, unguessable — hashed at rest, not the raw emailed value
+  expiresAt DateTime         // short-lived, e.g. 1 hour from creation
+  usedAt    DateTime?        // set once consumed; a used or expired token is rejected
+  createdAt DateTime @default(now())
+}

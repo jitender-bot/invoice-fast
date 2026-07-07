@@ -1,0 +1,37 @@
+[
+  {
+    "id": "inv-ffk7e77fg",
+    "userId": "user_123",
+    "number": "INV-0001",
+    "status": "SENT",
+    "sender": "",
+    "billTo": "",
+    "shipTo": "",
+    "date": "2026-07-04",
+    "dueDate": "2026-07-04",
+    "paymentTerms": "Due on Receipt",
+    "poNumber": "",
+    "currency": "USD",
+    "lineItems": [
+      {
+        "id": "item-c7c1593a-a8b5-4f0a-bdf4-ff84626401e1",
+        "description": "",
+        "quantity": 1,
+        "rate": 0,
+        "amount": 0
+      }
+    ],
+    "notes": "",
+    "terms": "",
+    "taxRate": 0,
+    "taxType": "percent",
+    "discountValue": 0,
+    "discountType": "percent",
+    "shipping": 0,
+    "amountPaid": 0,
+    "total": 0,
+    "balanceDue": 0,
+    "createdAt": "2026-07-04T11:44:04.732Z",
+    "updatedAt": "2026-07-04T11:44:04.732Z"
+  }
+]
